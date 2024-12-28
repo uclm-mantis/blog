@@ -2,45 +2,39 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
-import html from 'remark-html';
-
-export interface PostMetadata {
-  title: string;
-  date: string;
-  slug: string;
-}
-
-export interface PostContent extends PostMetadata {
-  contentHtml: string;
-}
+import math from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeStringify from 'rehype-stringify';
+import remarkRehype from 'remark-rehype';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
-export function getAllPosts(): PostMetadata[] {
+export function getAllPosts() {
   const filenames = fs.readdirSync(contentDirectory);
   return filenames.map((filename) => {
     const filepath = path.join(contentDirectory, filename);
     const fileContents = fs.readFileSync(filepath, 'utf8');
     const { data } = matter(fileContents);
 
-    return {
-      ...(data as Omit<PostMetadata, 'slug'>),
-      slug: filename.replace('.md', ''),
-    };
+    return { ...data, slug: filename.replace('.md', '') };
   });
 }
 
-export function getPostBySlug(slug: string): PostContent {
+export function getPostBySlug(slug: string) {
   const filepath = path.join(contentDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(filepath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = remark().use(html).processSync(content);
-  const contentHtml = processedContent.toString();
+  const processedContent = remark()
+    .use(math)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeKatex)
+    .use(rehypeStringify, { allowDangerousHtml: true })
+    .processSync(content);
 
   return {
-    ...(data as PostMetadata),
+    ...data,
     slug,
-    contentHtml,
+    contentHtml: processedContent.toString(),
   };
 }

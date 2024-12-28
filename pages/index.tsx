@@ -1,9 +1,14 @@
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
-import { getAllPosts, PostMetadata } from '../lib/markdown';
+import { getAllPosts } from '../lib/markdown';
+
+interface Post {
+  title: string;
+  slug: string;
+}
 
 interface HomeProps {
-  posts: PostMetadata[];
+  posts: Post[];
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -16,7 +21,9 @@ export default function Home({ posts }: HomeProps) {
     <ul>
       {posts.map((post) => (
         <li key={post.slug}>
-          <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+          <Link href={`/posts/${post.slug}`}>
+            {post.title}
+          </Link>
         </li>
       ))}
     </ul>

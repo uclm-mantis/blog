@@ -1,8 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPosts, getPostBySlug, PostContent } from '../../lib/markdown';
+import { getAllPosts, getPostBySlug } from '../../lib/markdown';
+
+interface Post {
+  title: string;
+  date: string;
+  contentHtml: string;
+}
 
 interface PostProps {
-  post: PostContent;
+  post: Post;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -15,11 +21,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = getPostBySlug(params?.slug as string);
-  return { props: { post } };
+  if (!params?.slug || typeof params.slug !== 'string') {
+    return { notFound: true };
+  }
+
+  const post = getPostBySlug(params.slug);
+
+  return {
+    props: {
+      post,
+    },
+  };
 };
 
-export default function Post({ post }: PostProps) {
+export default function PostPage({ post }: PostProps) {
   return (
     <article>
       <h1>{post.title}</h1>
