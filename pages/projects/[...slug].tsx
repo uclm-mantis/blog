@@ -36,7 +36,7 @@ export default function ProjectPage({ project }: ProjectProps) {
     <article>
       <h1>{project.title}</h1>
       <time>{project.date}</time>
-      <div dangerouslySetInnerHTML={{ __html: project.contentHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: project?.contentHtml||'' }} />
     </article>
   );
 }
