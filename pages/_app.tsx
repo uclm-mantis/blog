@@ -1,11 +1,16 @@
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import "./globals.css";
 import "katex/dist/katex.min.css";
+import "./globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log('Next.js se está ejecutando');
+  const router = useRouter();
+  const currentSlug = router.pathname.split('/')[1] || '';
+
   return (
-    <Layout><Component {...pageProps} /></Layout>
+    <Layout sections={pageProps.sections || []} currentSlug={currentSlug}>
+      <Component {...pageProps} />
+    </Layout>
   );
 }

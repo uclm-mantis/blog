@@ -10,6 +10,7 @@ import remarkRehype from 'remark-rehype';
 const contentDirectory = path.join(process.cwd(), 'content');
 
 interface BaseItem {
+  title: string;
   slug: string;
   section: string;
   content?: string;
@@ -17,14 +18,12 @@ interface BaseItem {
 }
 
 export interface Project extends BaseItem {
-  title: string;
   date?: string;
   description?: string;
   tags?: string[];
 }
 
 export interface TeamMember extends BaseItem {
-  name: string;
   id?: string;
   position?: string;
   email?: string;
@@ -32,9 +31,7 @@ export interface TeamMember extends BaseItem {
 }
 
 export interface Post extends BaseItem {
-  title: string;
   date?: string;
-  content?: string;
 }
 
 function getFilesRecursively(dir: string): string[] {

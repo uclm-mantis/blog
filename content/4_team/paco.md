@@ -1,5 +1,5 @@
 ---
-name: "Francisco Moya"
+title: "Francisco Moya"
 email: "francisco.moya@uclm.es"
 id: "50182432-C"
 github: FranciscoMoya

@@ -1,8 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAll, getBySlug, Project } from '../../lib/markdown';
+import { getSections, Section } from '../../lib/getSections';
 
 interface ProjectProps {
   project: Project;
+  sections: Section[];
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -15,28 +17,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-
   if (!params?.slug || !Array.isArray(params.slug)) {
     return { notFound: true };
   }
 
   const slug = params.slug.join('/'); // Reconstruir el slug como una ruta relativa
   const project = getBySlug<Project>(slug);
+  const sections = getSections(); // Obtener las secciones
 
   return {
     props: {
       project,
+      sections,
     },
   };
 };
 
-export default function ProjectPage({ project }: ProjectProps) {
-
+export default function ProjectPage({ project, sections }: ProjectProps) {
   return (
     <article>
       <h1>{project.title}</h1>
       <time>{project.date}</time>
-      <div dangerouslySetInnerHTML={{ __html: project?.contentHtml||'' }} />
+      <div dangerouslySetInnerHTML={{ __html: project?.contentHtml || '' }} />
     </article>
   );
 }

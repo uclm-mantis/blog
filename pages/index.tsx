@@ -1,7 +1,22 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { GetStaticProps } from 'next';
+import { getSections, Section } from '../lib/getSections';
 
-export default function Home() {
+interface HomeProps {
+  sections: Section[];
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const sections = getSections(); // Obtener las secciones
+  return {
+    props: {
+      sections,
+    },
+  };
+};
+
+export default function Home({ sections }: HomeProps) {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Header */}
@@ -12,22 +27,16 @@ export default function Home() {
               whileHover={{ scale: 1.1 }}
               className="text-2xl font-bold text-white"
             >
-              Mi Portfolio
+              Mantis Research Group
             </motion.div>
             <ul className="flex space-x-6">
-              <motion.li whileHover={{ scale: 1.1 }}>
-                <Link href="/projects">Proyectos</Link>
-              </motion.li>
-              <motion.li whileHover={{ scale: 1.1 }}>
-                <a href="#projects" className="hover:text-blue-400">
-                  Proyectos
-                </a>
-              </motion.li>
-              <motion.li whileHover={{ scale: 1.1 }}>
-                <a href="#contact" className="hover:text-blue-400">
-                  Contacto
-                </a>
-              </motion.li>
+              {sections.map((section) => (
+                <motion.li key={section.slug} whileHover={{ scale: 1.1 }}>
+                  <Link href={section.slug} className="hover:text-blue-400">
+                    {section.name}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
           </nav>
         </div>
@@ -45,7 +54,7 @@ export default function Home() {
           className="text-center"
         >
           <h1 className="text-5xl font-bold mb-4">
-            Hola, soy <span className="text-blue-400">[Tu Nombre]</span>
+            <span className="text-blue-400">Mantis Research Group</span>
           </h1>
           <p className="text-lg mb-6">Desarrollador web | Diseñador | Innovador</p>
           <motion.a
@@ -55,75 +64,6 @@ export default function Home() {
             className="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg shadow-lg"
           >
             Ver mis proyectos
-          </motion.a>
-        </motion.div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-20 bg-gray-900">
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto px-6 text-center"
-        >
-          <h2 className="text-4xl font-bold mb-6">Sobre mí</h2>
-          <p className="text-lg text-gray-400">
-            Soy un apasionado del desarrollo web con experiencia en diseño
-            creativo e innovación tecnológica. Trabajo con tecnologías modernas
-            como React, Tailwind CSS y mucho más.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 bg-gray-800">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-10">Mis Proyectos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((project) => (
-              <motion.div
-                key={project}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gray-900 p-6 rounded-lg shadow-lg transition-all"
-              >
-                <img
-                  src={`https://via.placeholder.com/300x200?text=Proyecto+${project}`}
-                  alt={`Proyecto ${project}`}
-                  className="rounded-lg mb-4"
-                />
-                <h3 className="text-2xl font-bold">Proyecto {project}</h3>
-                <p className="text-gray-400">
-                  Descripción breve del proyecto {project}.
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-900">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <h2 className="text-4xl font-bold mb-6">Contáctame</h2>
-          <p className="text-lg text-gray-400 mb-6">
-            Si tienes alguna pregunta o quieres colaborar, no dudes en
-            contactarme.
-          </p>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            href="mailto:tucorreo@ejemplo.com"
-            className="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg shadow-lg"
-          >
-            Enviar un correo
           </motion.a>
         </motion.div>
       </section>
