@@ -1,6 +1,7 @@
 ---
 title: "Ejemplo de Matemáticas"
 date: "2024-12-28"
+section: News
 ---
 
 Este es un ejemplo de matemáticas en línea: $E = mc^2$.
