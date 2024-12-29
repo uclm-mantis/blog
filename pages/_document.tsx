@@ -1,8 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
-import getConfig from 'next/config';
+import config from '../next.config';
 
-const { publicRuntimeConfig } = getConfig();
-const { basePath } = publicRuntimeConfig;
+const basePath = config.basePath || '';
 
 export default function Document() {
   return (
