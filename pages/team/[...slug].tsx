@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default function MemberPage({ member, sections }: MemberProps) {
+export default function MemberPage({ member }: MemberProps) {
   return (
     <article>
       <h1>{member.title}</h1>

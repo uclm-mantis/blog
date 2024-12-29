@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default function PostPage({ post, sections }: PostProps) {
+export default function PostPage({ post }: PostProps) {
   return (
     <article>
       <h1>{post.title}</h1>

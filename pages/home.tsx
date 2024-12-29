@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { files, sections } };
 };
 
-export default function Home({ files, sections }: HomeProps) {
+export default function Home({ files }: HomeProps) {
   return (
     <div>
       <h1>Inicio</h1>

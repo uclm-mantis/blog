@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default function ProjectPage({ project, sections }: ProjectProps) {
+export default function ProjectPage({ project }: ProjectProps) {
   return (
     <article>
       <h1>{project.title}</h1>
