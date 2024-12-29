@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const slug = params.slug.join('/'); // Reconstruir el slug como una ruta relativa
-  const post = getBySlug<Post>(slug);
+  const post = await getBySlug<Post>(slug);
   const sections = getSections(); // Obtener las secciones
 
   return {

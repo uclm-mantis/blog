@@ -1,20 +1,26 @@
-// pages/home.tsx
 import { GetStaticProps } from 'next';
-import { getAll, getBySlug, MarkdownFile } from '../lib/markdown';
+import { getAll, getBySlug, BaseItem } from '../lib/markdown';
 import { getSections, Section } from '../lib/getSections';
 
 interface HomeProps {
-  files: MarkdownFile[];
+  files: BaseItem[];
   sections: Section[];
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const metadata = getAll<MarkdownFile>('Home'); // Obtener solo los metadatos
-  const files = metadata.map((file) => ({
-    ...file,
-    contentHtml: getBySlug<MarkdownFile>(file.slug).contentHtml, // Obtener el contenido
-    slug: file.slug.replace(/\//g, '-'), // Convertir slugs en formato válido para IDs
-  }));
+  const metadata = getAll<BaseItem>('Home'); // Obtener solo los metadatos
+
+  // Usar Promise.all para manejar las operaciones asincrónicas
+  const files = await Promise.all(
+    metadata.map(async (file) => {
+      const contentHtml = (await getBySlug<BaseItem>(file.slug)).contentHtml;
+      return {
+        ...file,
+        contentHtml,
+        slug: file.slug.replace(/\//g, '-'), // Convertir slugs en formato válido para IDs
+      };
+    })
+  );
 
   // Modificar la sección "Home" con los slugs ajustados
   const sections = getSections();

@@ -22,7 +22,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const slug = params.slug.join('/'); // Reconstruir el slug como una ruta relativa
-  const member = getBySlug<TeamMember>(slug);
+  const member = await getBySlug<TeamMember>(slug);
   const sections = getSections(); // Obtener las secciones
 
   return {

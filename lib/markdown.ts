@@ -4,15 +4,19 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import math from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import rehypeStringify from 'rehype-stringify';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
+import rehypeMermaidJs from 'rehype-mermaidjs';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
-interface BaseItem {
+export interface BaseItem {
   title: string;
   slug: string;
   section: string;
+  order?: number;
   content?: string;
   contentHtml?: TrustedHTML;
 }
@@ -67,7 +71,7 @@ export function getAll<T extends BaseItem = BaseItem>(section?: string): T[] {
     .filter((post) => (section ? post.section === section : true));
 }
 
-export function getBySlug<T extends BaseItem = BaseItem>(slug: string) {
+export async function getBySlug<T extends BaseItem = BaseItem>(slug: string) {
   const filepath = path.join(contentDirectory, slug) + '.md';
 
   if (!fs.existsSync(filepath)) {
@@ -77,15 +81,19 @@ export function getBySlug<T extends BaseItem = BaseItem>(slug: string) {
   const fileContents = fs.readFileSync(filepath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = remark()
+  const processor = unified()
+    .use(remarkParse)
     .use(math)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeKatex)
-    .use(rehypeStringify, { allowDangerousHtml: true })
-    .processSync(content);
+    .use(rehypeMermaidJs)
+    .use(rehypeStringify, { allowDangerousHtml: true });
+    ;
+
+  const processedContent = await processor.process(content);
 
   return {
     ...data,
-    contentHtml: processedContent.toString() as TrustedHTML,
+    contentHtml: processedContent.toString() as unknown as TrustedHTML,
   } as T;
 }
