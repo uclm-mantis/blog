@@ -7,7 +7,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import rehypeMermaidJs from 'rehype-mermaidjs';
+import rehypeMermaid from 'rehype-mermaid';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -85,7 +85,7 @@ export async function getBySlug<T extends BaseItem = BaseItem>(slug: string) {
     .use(math)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeKatex)
-    .use(rehypeMermaidJs)
+    .use(rehypeMermaid)
     .use(rehypeStringify, { allowDangerousHtml: true });
     ;
 
