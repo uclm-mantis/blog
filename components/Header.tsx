@@ -9,7 +9,7 @@ interface HeaderProps {
 export default function Header({ sections }: HeaderProps) {
   return (
     <header className="bg-gray-800 text-white py-4 shadow-lg">
-      <nav className="container mx-auto flex justify-between items-center">
+      <nav className="max-w-7xl container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
         <Link href="/" className="text-2xl font-bold">
           Mi Sitio Web
         </Link>

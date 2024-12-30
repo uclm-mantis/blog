@@ -19,29 +19,6 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function Home({ sections }: HomeProps) {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
-      {/* Header */}
-      <header className="fixed top-0 left-0 w-full bg-gray-800 shadow-lg z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex justify-between items-center py-4">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="text-2xl font-bold text-white"
-            >
-              Mantis Research Group
-            </motion.div>
-            <ul className="flex space-x-6">
-              {sections.map((section) => (
-                <motion.li key={section.slug} whileHover={{ scale: 1.1 }}>
-                  <Link href={section.slug} className="hover:text-blue-400">
-                    {section.name}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section
         id="hero"
