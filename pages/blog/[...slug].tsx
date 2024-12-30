@@ -36,9 +36,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function PostPage({ post }: PostProps) {
   return (
-    <article>
+    <article className="prose lg:prose-xl mx-auto">
       <h1>{post.title}</h1>
-      <time>{post.date}</time>
+      <time className="text-gray-600">{post.date}</time>
       <div dangerouslySetInnerHTML={{ __html: post?.contentHtml || '' }} />
     </article>
   );

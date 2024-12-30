@@ -41,7 +41,7 @@ export default function Home({ files }: HomeProps) {
     <div>
       <h1>Inicio</h1>
       {files.map((file) => (
-        <section id={file.slug} key={file.slug} className="prose max-w-none mb-8">
+        <section id={file.slug} key={file.slug}  className="prose lg:prose-xl mx-auto max-w-none mb-8">
           <h2 id={file.slug}>{file.title}</h2>
           <div dangerouslySetInnerHTML={{ __html: file.contentHtml || '' }} />
         </section>

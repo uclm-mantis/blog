@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function MemberPage({ member }: MemberProps) {
   return (
-    <article>
+    <article className="prose lg:prose-xl mx-auto">
       <h1>{member.title}</h1>
       <div className="email">{member.email}</div>
       <div dangerouslySetInnerHTML={{ __html: member?.contentHtml || '' }} />

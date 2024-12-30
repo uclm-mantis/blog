@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function ProjectPage({ project }: ProjectProps) {
   return (
-    <article>
+    <article className="prose lg:prose-xl mx-auto">
       <h1>{project.title}</h1>
       <time>{project.date}</time>
       <div dangerouslySetInnerHTML={{ __html: project?.contentHtml || '' }} />
