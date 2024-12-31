@@ -9,7 +9,7 @@ interface LayoutProps {
   children: React.ReactNode;
   title?: string;
   sections: Section[];
-  currentSlug?: string;
+  currentSection?: string;
 }
 
 interface Section {
@@ -20,13 +20,13 @@ interface Section {
 
 export default function Layout({
   children,
-  title = "Mi Sitio Web",
+  title,
   sections,
-  currentSlug,
+  currentSection,
 }: LayoutProps) {
-  const currentSection = sections.find(
-    (section) => section.slug === `/${currentSlug}`
-  );
+
+  const section = sections.find((sec) => (sec.name === currentSection));
+  //console.log(currentSection, JSON.stringify(section));
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function Layout({
               {children}
             </div>
           </main>
-          <TOCSidebar currentSection={currentSection} />
+          <TOCSidebar currentSection={section} />
         </div>
         <Footer />
       </div>

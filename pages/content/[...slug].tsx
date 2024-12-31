@@ -1,18 +1,21 @@
+// pages/blog/[...slug].tsx
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAll, getBySlug, TeamMember } from '../../lib/markdown';
+import { getAll, getBySlug } from '../../lib/markdown';
+import { Content } from '../../lib/content';
 import { getSections, Section } from '../../lib/getSections';
+import ContentRenderer from '@/components/ContentRenderer';
 
-interface MemberProps {
-  member: TeamMember;
+interface PostProps {
+  content: Content;
   sections: Section[];
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const members = getAll<TeamMember>('Team');
-  const paths = members.map((post) => ({
+  const posts = await getAll();
+  const paths = posts.map((post) => ({
     params: { slug: post.slug.split('/') },
   }));
-
+  console.log(JSON.stringify(paths));
   return { paths, fallback: false };
 };
 
@@ -22,23 +25,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const slug = params.slug.join('/'); // Reconstruir el slug como una ruta relativa
-  const member = await getBySlug<TeamMember>(slug);
+  const content = await getBySlug(slug);
   const sections = getSections(); // Obtener las secciones
+  const currentSection = content.section;
 
   return {
     props: {
-      member,
+      content,
       sections,
+      currentSection,
     },
   };
 };
 
-export default function MemberPage({ member }: MemberProps) {
-  return (
-    <article className="prose lg:prose-xl mx-auto">
-      <h1>{member.title}</h1>
-      <div className="email">{member.email}</div>
-      <div dangerouslySetInnerHTML={{ __html: member?.contentHtml || '' }} />
-    </article>
-  );
+export default function PostPage({ content }: PostProps) {
+  return (<ContentRenderer content={content} variant="article" />);
 }

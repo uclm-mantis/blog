@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { getSections, Section } from '../lib/getSections';
 
@@ -16,7 +15,9 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Home({ sections }: HomeProps) {
+  
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Hero Section */}

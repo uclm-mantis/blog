@@ -1,7 +1,8 @@
 ---
-title: "Ejemplo de Matemáticas"
+title: "Segundo mensaje"
 date: "2024-12-28"
 section: Blog
+type: post
 ---
 
 Este es un ejemplo de matemáticas en línea: $E = mc^2$.

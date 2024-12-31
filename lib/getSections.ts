@@ -29,7 +29,7 @@ export const getSections = (): Section[] => {
             if (!sections[sectionName]) {
               sections[sectionName] = {
                 name: sectionName,
-                slug: `/${sectionName.toLowerCase().replace(/\s+/g, '-')}`,
+                slug: `/section/${sectionName.replace(/\s+/g, '-')}`,
                 items: [],
               };
             }

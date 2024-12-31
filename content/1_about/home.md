@@ -1,6 +1,7 @@
 ---
 title: "About Mantis"
-section: Home
+section: About
+type: block
 ---
 
 Prueba de home page

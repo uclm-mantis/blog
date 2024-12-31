@@ -2,6 +2,7 @@
 title: "DCAIOPS"
 date: "2024-12-28"
 section: Projects
+type: project
 ---
 
 Este es un ejemplo de matemáticas en línea: $E = mc^2$.
