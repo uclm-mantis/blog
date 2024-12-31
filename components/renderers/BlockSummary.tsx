@@ -9,6 +9,6 @@ interface BlockSummaryProps {
 
 export default function BlockSummary({ block }: BlockSummaryProps) {
   return (
-    <Link href={`/content/${block.slug}`}>{block.title}</Link>
+    <Link href={`#${block.slug}`}>{block.title}</Link>
   );
 }

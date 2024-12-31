@@ -10,6 +10,7 @@ interface LayoutProps {
   title?: string;
   sections: Section[];
   currentSection?: string;
+  isSinglePage?: boolean;
 }
 
 interface Section {
@@ -23,11 +24,10 @@ export default function Layout({
   title,
   sections,
   currentSection,
+  isSinglePage
 }: LayoutProps) {
 
-  const section = sections.find((sec) => (sec.name === currentSection));
-  //console.log(currentSection, JSON.stringify(section));
-
+  const section = sections.find((sec) => (sec.name === currentSection)) as Section;
   return (
     <>
       <Head>
@@ -37,12 +37,19 @@ export default function Layout({
       <div className="flex flex-col min-h-screen">
         <Header sections={sections} />
         <div className="flex flex-1 relative">
-          <main className="flex-1 flex justify-center p-6 bg-gray-100">
-            <div className="w-full max-w-screen-lg bg-white shadow-lg p-6 rounded">
+          <main
+            className={`flex-1 flex justify-center p-6 bg-gray-100 transition-all duration-500 ${
+              isSinglePage ? "lg:pr-[200px] md:pr-[200px]" : ""
+            }`}
+          >
+            <div className="w-full max-w-screen-lg bg-white shadow-lg rounded">
               {children}
             </div>
           </main>
-          <TOCSidebar currentSection={section} />
+          <TOCSidebar
+            currentSection={section}
+            isSinglePage={isSinglePage || false}
+          />
         </div>
         <Footer />
       </div>

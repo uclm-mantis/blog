@@ -7,7 +7,8 @@ export interface ContentBase {
 
   order?: number;
   content?: string;
-  contentHtml?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  contentHtml?: any;
 }
 
 export interface Project extends ContentBase {
@@ -32,7 +33,11 @@ export interface Post extends ContentBase {
 
 export interface Block extends ContentBase {
   type: "block";
-  date?: string;
+  style?: string;
 }
 
 export type Content = Project | TeamMember | Post | Block;
+
+export const slug2anchor = (slug: string): string => {
+  return slug.replace(/[^a-zA-Z0-9-_\.]+/g, "").replace(/^\d/, "_")
+}

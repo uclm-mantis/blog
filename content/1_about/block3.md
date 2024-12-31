@@ -1,20 +1,21 @@
 ---
-title: "Segundo mensaje"
-date: "2024-12-28"
-section: Blog
-type: post
+title: "Manage your data"
+section: About
+type: block
+style: bg-gray-800 text-black p-5
 ---
 
-Este es un ejemplo de matemáticas en línea: $E = mc^2$.
 
-Aquí tienes una fórmula en bloque:
+<div className="flex">
+  <div className="w-1/2 p-4 text-gray-200">
+## <span className="text-white">Manage your data</span>
 
-$$
-\int_a^b f(x) dx = F(b) - F(a)
-$$
-
-  <LineChart
-    width={500}
+You have full control of changes using GitHub.
+  </div>
+  <div className="w-1/2 p-4 text-white">
+  
+  <LineChart className="text-md"
+    width={450}
     height={300}
     data={[
       { name: 'Page A', uv: 4000, pv: 2400, amt: 2400, },
@@ -40,3 +41,7 @@ $$
     <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
     <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
   </LineChart>
+
+  </div>
+</div>
+

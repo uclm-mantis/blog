@@ -8,6 +8,7 @@ import ContentRenderer from '@/components/ContentRenderer';
 interface PostProps {
   content: Content;
   sections: Section[];
+  currentSection: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -15,7 +16,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = posts.map((post) => ({
     params: { slug: post.slug.split('/') },
   }));
-  console.log(JSON.stringify(paths));
   return { paths, fallback: false };
 };
 
@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const slug = params.slug.join('/'); // Reconstruir el slug como una ruta relativa
   const content = await getBySlug(slug);
+
   const sections = getSections(); // Obtener las secciones
   const currentSection = content.section;
 

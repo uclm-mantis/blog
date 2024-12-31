@@ -2,12 +2,131 @@ import type { AppProps } from 'next/app';
 import Layout from '../components/Layout';
 import "katex/dist/katex.min.css";
 import "./globals.css";
+import { MDXProvider } from '@mdx-js/react';
+import {
+    Surface,
+    Layer,
+    Legend,
+    DefaultLegendContent,
+    Tooltip,
+    DefaultTooltipContent,
+    ResponsiveContainer,
+    Cell,
+    Text,
+    Label,
+    LabelList,
+    Customized,
+    Sector,
+    Curve,
+    Rectangle,
+    Polygon,
+    Dot,
+    Cross,
+    Symbols,
+    PolarGrid,
+    PolarRadiusAxis,
+    PolarAngleAxis,
+    Pie,
+    Radar,
+    RadialBar,
+    Brush,
+    ReferenceLine,
+    ReferenceDot,
+    ReferenceArea,
+    CartesianAxis,
+    CartesianGrid,
+    Line,
+    Area,
+    Bar,
+    Scatter,
+    XAxis,
+    YAxis,
+    ZAxis,
+    ErrorBar,
+    LineChart,
+    BarChart,
+    PieChart,
+    Treemap,
+    Sankey,
+    RadarChart,
+    ScatterChart,
+    AreaChart,
+    RadialBarChart,
+    ComposedChart,
+    SunburstChart,
+    Funnel,
+    FunnelChart,
+    Trapezoid,
+} from 'recharts';
+import ChartComponent from '@/components/ChartComponent';
+
+const mdxComponents = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  div: (props: any) => <div {...props} />,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  span: (props: any) => <span {...props} />,
+  Chart: ChartComponent,
+  Surface,
+  Layer,
+  Legend,
+  DefaultLegendContent,
+  Tooltip,
+  DefaultTooltipContent,
+  ResponsiveContainer,
+  Cell,
+  Text,
+  Label,
+  LabelList,
+  Customized,
+  Sector,
+  Curve,
+  Rectangle,
+  Polygon,
+  Dot,
+  Cross,
+  Symbols,
+  PolarGrid,
+  PolarRadiusAxis,
+  PolarAngleAxis,
+  Pie,
+  Radar,
+  RadialBar,
+  Brush,
+  ReferenceLine,
+  ReferenceDot,
+  ReferenceArea,
+  CartesianAxis,
+  CartesianGrid,
+  Line,
+  Area,
+  Bar,
+  Scatter,
+  XAxis,
+  YAxis,
+  ZAxis,
+  ErrorBar,
+  LineChart,
+  BarChart,
+  PieChart,
+  Treemap,
+  Sankey,
+  RadarChart,
+  ScatterChart,
+  AreaChart,
+  RadialBarChart,
+  ComposedChart,
+  SunburstChart,
+  Funnel,
+  FunnelChart,
+  Trapezoid,
+};
 
 export default function App({ Component, pageProps }: AppProps) {
-  //console.log('App', JSON.stringify(pageProps));
   return (
-    <Layout sections={pageProps.sections || []} currentSection={pageProps.currentSection}>
-      <Component {...pageProps} />
-    </Layout>
+    <MDXProvider components={mdxComponents}>
+      <Layout sections={pageProps.sections || []} currentSection={pageProps.currentSection} isSinglePage={pageProps.isSinglePage} >
+        <Component {...pageProps} />
+      </Layout>
+    </MDXProvider>
   );
 }

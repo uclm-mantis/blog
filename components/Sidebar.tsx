@@ -44,7 +44,7 @@ export default function Sidebar({
         className="pointer-events-auto absolute top-0 bottom-0 right-0 bg-gray-100 shadow-lg border-l border-gray-300 overflow-hidden z-30"
         initial={{ width: 0 }}
         animate={{
-          width: isOpen ? "250px" : "0px",
+          width: isOpen ? "200px" : "0px",
         }}
         transition={{ duration: 0.5 }}
       >
@@ -68,10 +68,10 @@ export default function Sidebar({
           style={{
             width: "20px",
             height: "80px",
-            top: "calc(50% - 40px)", // Centrado exacto
+            top: "calc(50vh - 40px)", // Centrado exacto
           }}
           onClick={() => setIsOpen(!isOpen)}
-          animate={initialized ? { right: isOpen ? 250 : 0 } : undefined}
+          animate={initialized ? { right: isOpen ? 200 : 0 } : undefined}
           initial={{ right: 0 }}
           transition={initialized ? { duration: 0.5 } : { duration: 0 }}
           whileTap={{ scale: 0.95 }}

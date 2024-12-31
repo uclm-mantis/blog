@@ -39,17 +39,34 @@ function getMetadata(slug: string, filepath: string): Omit<Content, 'contentHtml
   } as Content;
 }
 
-async function renderContent(contents: Content[]): Promise<Content[]> {
-  const processor = unified()
-    .use(remarkParse)
-    .use(math)
-    .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeKatex)
-    .use(rehypeMermaid)
-    .use(rehypeStringify, { allowDangerousHtml: true });
+import { serialize } from "next-mdx-remote/serialize";
 
+async function renderContent(contents: Content[]): Promise<Content[]> {
   return Promise.all(
     contents.map(async (content) => {
+      if (content.type === "post" || content.type === "block") {
+        // Procesa contenido como MDX
+        const mdxSource = await serialize(content.content || '', {
+          mdxOptions: {
+            remarkPlugins: [math],
+            rehypePlugins: [rehypeKatex, rehypeMermaid],
+          },
+        });
+        return {
+          ...content,
+          contentHtml: mdxSource, // Devuelve la fuente MDX
+        };
+      }
+
+      // Para otros tipos, usa el pipeline existente
+      const processor = unified()
+        .use(remarkParse)
+        .use(math)
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeKatex)
+        .use(rehypeMermaid)
+        .use(rehypeStringify, { allowDangerousHtml: true });
+
       const processedContent = await processor.process(content.content);
       return {
         ...content,
@@ -59,6 +76,7 @@ async function renderContent(contents: Content[]): Promise<Content[]> {
   );
 }
 
+
 export async function getAll(
   section?: string,
   type?: Content['type']
@@ -67,11 +85,11 @@ export async function getAll(
 
   // Obtener metadatos de todos los archivos
   const allMetadata = filePaths
-    .filter((filePath) => filePath.endsWith('.md'))
+    .filter((filePath) => (filePath.endsWith('.md') || filePath.endsWith('.mdx')))
     .map((filePath) => {
       const slug = path
         .relative(contentDirectory, filePath)
-        .replace(/\.md$/, '')
+        .replace(/\.(md|mdx)$/, '')
         .split(path.sep)
         .join('/');
       return getMetadata(slug, filePath);
@@ -89,8 +107,10 @@ export async function getAll(
 }
 
 export async function getBySlug(slug: string): Promise<Content> {
-  const filepath = path.join(contentDirectory, slug) + '.md';
-  const metadata = getMetadata(slug, filepath);
+  const md = path.join(contentDirectory, slug) + '.md';
+  const mdx = path.join(contentDirectory, slug) + '.mdx';
+
+  const metadata = (fs.existsSync(md) ? getMetadata(slug, md) : getMetadata(slug, mdx));
   const [renderedContent] = await renderContent([metadata]);
   return renderedContent;
 }

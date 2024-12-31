@@ -3,12 +3,13 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAll } from '@/lib/markdown';
 import { Content } from '@/lib/content';
 import { getSections, Section } from '@/lib/getSections';
-import { sectionRenderers, SectionRenderers } from '../../config';
+import { sectionRenderers, SectionRenderers } from '@/config';
 
 interface SectionProps {
   items: Content[];
   sections: Section[];
   currentSection: string;
+  isSinglePage: boolean;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -25,17 +26,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
   const currentSection = params.slug.at(-1);
-  const items =await getAll(currentSection);
-  const sections = getSections(); // Obtener las secciones
-  return { props: { items, sections, currentSection } };
+  const isSinglePage = sectionRenderers[currentSection as keyof SectionRenderers]?.isSinglePage || false;
+  const items = await getAll(currentSection);
+  const sections = getSections();
+  return { props: { items, sections, currentSection, isSinglePage } };
 };
 
 export default function SectionPage({ items, currentSection }: SectionProps) {
-  const Renderer = sectionRenderers[currentSection as keyof SectionRenderers] || (() => <p>Renderer for {currentSection} not found</p>);
-
-  return (
-    <div className="prose lg:prose-xl mx-auto">
-      <Renderer items={items} currentSection={currentSection} />
-    </div>
-  );
+  const Renderer = sectionRenderers[currentSection as keyof SectionRenderers]?.renderer || (() => <p>Renderer for {currentSection} not found</p>);
+  return (<Renderer items={items} currentSection={currentSection} />);
 }

@@ -32,6 +32,9 @@ const config: Config = {
     require('@tailwindcss/typography'), // Soporte para contenido enriquecido (opcional)
     require('@tailwindcss/forms'), // Estilización de formularios (opcional)
   ],
+  safelist: [
+    { pattern: /.*/, }
+  ],
 };
 
 export default config;

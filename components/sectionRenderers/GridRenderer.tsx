@@ -9,12 +9,14 @@ interface GridRendererProps {
 
 export default function GridRenderer({ items }: GridRendererProps) {
   return (
+    <div className="prose lg:prose-xl mx-auto p-6">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {items.map((content) => (
         <div key={content.slug} className="card p-4 bg-gray-100 rounded-lg shadow-md">
           <ContentRenderer content={content} variant="summary" />
         </div>
       ))}
+    </div>
     </div>
   );
 }

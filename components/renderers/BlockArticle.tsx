@@ -1,16 +1,18 @@
-// components/renderers/ProjectArticle.tsx
+// components/renderers/BlockArticle.tsx
 import React from "react";
 import { Block } from "@/lib/content";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { slug2anchor } from '@/lib/content';
 
 interface BlockArticleProps {
-    block: Block;
+  block: Block & { mdxContent: MDXRemoteSerializeResult };
 }
 
-export default function ContentSummary({ block }: BlockArticleProps) {
+export default function BlockArticle({ block }: BlockArticleProps) {
+  const anchor = slug2anchor(block.slug);
   return (
-    <section id={block.slug} key={block.slug}  className="prose lg:prose-xl mx-auto max-w-none mb-8">
-        <h2 id={block.slug}>{block.title}</h2>
-        <div dangerouslySetInnerHTML={{ __html: block.contentHtml || '' }} />
+    <section id={anchor} key={block.slug}  className={`prose lg:prose-xl mx-auto max-w-none ${block.style||''}`}>
+      <MDXRemote {...block.contentHtml} />
     </section>
   );
 }
