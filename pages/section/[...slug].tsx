@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAll } from '@/lib/markdown';
 import { Content } from '@/lib/content';
 import { getSections, Section } from '@/lib/getSections';
-import { sectionRenderers, SectionRenderers } from '@/components/sectionRenderers';
+import { sectionRenderers, SectionRenderers } from '../../config';
 
 interface SectionProps {
   items: Content[];
