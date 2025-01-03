@@ -1,8 +1,7 @@
 // pages/blog/[...slug].tsx
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAll, getBySlug } from '../../lib/markdown';
+import { getAll, getBySlug, getSections, Section } from '../../lib/markdown';
 import { Content } from '../../lib/content';
-import { getSections, Section } from '../../lib/getSections';
 import ContentRenderer from '@/components/ContentRenderer';
 
 interface PostProps {

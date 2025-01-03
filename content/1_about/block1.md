@@ -6,7 +6,7 @@ style: text-white
 ---
 
 <div className="relative bg-cover bg-scale p-5"
-         style={{ backgroundImage: `url('/blog/img/robotics.png')` }}>
+         style={{ backgroundImage: "url({{basePath}}/img/robotics.png)" }}>
 
     <div className="absolute inset-0 bg-black/60"></div>
     

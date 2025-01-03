@@ -36,12 +36,8 @@ export default function Layout({
       </Head>
       <div className="flex flex-col min-h-screen">
         <Header sections={sections} />
-        <div className="flex flex-1 relative">
-          <main
-            className={`flex-1 flex justify-center p-6 bg-gray-100 transition-all duration-500 ${
-              isSinglePage ? "lg:pr-[200px] md:pr-[200px]" : ""
-            }`}
-          >
+        <div className="flex flex-1 justify-center relative">
+          <main className="flex-1 flex justify-center p-6 bg-gray-100 transition-all duration-500">
             <div className="w-full max-w-screen-lg bg-white shadow-lg rounded">
               {children}
             </div>

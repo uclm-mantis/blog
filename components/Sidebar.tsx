@@ -1,41 +1,21 @@
 import { ReactNode, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowLeftIcon, ArrowRightIcon } from "./symbols";
 
 interface SidebarProps {
   children: ReactNode;
-  forceCollapsed?: boolean;
   hasContent?: boolean; // Nuevo atributo opcional para verificar si hay contenido
 }
 
 export default function Sidebar({
   children,
-  forceCollapsed = false,
   hasContent = true,
 }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 768);
-      if (window.innerWidth >= 768 && !forceCollapsed) {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [forceCollapsed]);
-
-  useEffect(() => {
-    setInitialized(true);
+    setInitialized(true); // Marca el slider como inicializado para animaciones
   }, []);
 
   return (
@@ -51,7 +31,7 @@ export default function Sidebar({
         <div className="p-4 h-full">{children}</div>
       </motion.aside>
 
-      {hasContent && (!isLargeScreen || forceCollapsed) && (
+      {hasContent && (
         <motion.button
           className="
             pointer-events-auto
@@ -76,29 +56,7 @@ export default function Sidebar({
           transition={initialized ? { duration: 0.5 } : { duration: 0 }}
           whileTap={{ scale: 0.95 }}
         >
-          {!isOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          )}
+          {!isOpen ? (<ArrowLeftIcon />) : (<ArrowRightIcon />)}
         </motion.button>
       )}
     </div>

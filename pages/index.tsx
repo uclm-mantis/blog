@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { GetStaticProps } from 'next';
-import { getSections, Section } from '../lib/getSections';
+import { getSections, Section } from '../lib/markdown';
 
 interface HomeProps {
   sections: Section[];
@@ -34,14 +34,14 @@ export default function Home({ sections }: HomeProps) {
           <h1 className="text-5xl font-bold mb-4">
             <span className="text-blue-400">Mantis Research Group</span>
           </h1>
-          <p className="text-lg mb-6">Desarrollador web | Diseñador | Innovador</p>
+          <p className="text-lg mb-6">Robotics | Automation | Innovation</p>
           <motion.a
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             href="#projects"
             className="px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg shadow-lg"
           >
-            Ver mis proyectos
+            Browse our projects
           </motion.a>
         </motion.div>
       </section>

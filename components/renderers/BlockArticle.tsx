@@ -1,8 +1,9 @@
 // components/renderers/BlockArticle.tsx
 import React from "react";
-import { Block } from "@/lib/content";
+import { Block } from "@/config";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import { slug2anchor } from '@/lib/content';
+import { slug2anchor } from '@/lib/util';
+import FileTreeViewer from "../FileTreeViewer";
 
 interface BlockArticleProps {
   block: Block & { mdxContent: MDXRemoteSerializeResult };
@@ -11,9 +12,10 @@ interface BlockArticleProps {
 export default function BlockArticle({ block }: BlockArticleProps) {
   const anchor = slug2anchor(block.slug);
   return (
-    <section id={anchor} key={block.slug}  className={`prose lg:prose-xl mx-auto max-w-none ${block.style||''}`}>
+    <div id={anchor} key={block.slug}  className={`prose lg:prose-xl mx-auto max-w-none ${block.style||''}`}>
       <MDXRemote {...block.contentHtml} />
-    </section>
+      {block.fileTree && (<FileTreeViewer title={block.title} fileTree={block.fileTree} />)}
+    </div>
   );
 }
 

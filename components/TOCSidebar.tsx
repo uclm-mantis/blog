@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React from "react";
 import Sidebar from "./Sidebar";
 import Link from "next/link";
-import { slug2anchor } from '@/lib/content';
+import { slug2anchor } from '@/lib/util';
 
 interface TOCSidebarProps {
   currentSection?: {
@@ -14,12 +14,11 @@ interface TOCSidebarProps {
 }
 
 export default function TOCSidebar({ currentSection, isSinglePage }: TOCSidebarProps) {
-  const forceCollapsed = !currentSection || currentSection.items.length <= 1;
   const hasContent = !!currentSection && currentSection.items.length > 0;
 
   return (
-    <Sidebar forceCollapsed={forceCollapsed} hasContent={hasContent}>
-      <ul>
+    <Sidebar hasContent={hasContent}>
+      <ul className="text-black">
         {currentSection?.items
           .sort((a, b) => a.order - b.order)
           .map((item) => {

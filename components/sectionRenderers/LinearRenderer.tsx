@@ -1,5 +1,5 @@
 // components/sectionRenderers/LinearRenderer.tsx
-import { Content } from '@/lib/content';
+import { Content } from '@/config';
 import ContentRenderer from '../ContentRenderer';
 
 interface LinearRendererProps {
@@ -9,8 +9,8 @@ interface LinearRendererProps {
 
 export default function LinearRenderer({ items }: LinearRendererProps) {
   return (
-    <>
+    <div className="mx-auto">
       {items.map((content) => (<ContentRenderer key={content.slug} content={content} variant="article" />))}
-    </>
+    </div>
   );
 }
