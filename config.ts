@@ -79,3 +79,16 @@ export const sectionRenderers = {
     Blog: { renderer: ListRenderer, isSinglePage: false },
 } as const;
 export type SectionRenderers = typeof sectionRenderers;
+
+
+function isProject(content: Content): content is Project { return content.type === 'project'; }
+function isPost(content: Content): content is Post { return content.type === 'post'; }
+
+export const contentCompare = {
+    project: (a: Content, b: Content) => {
+        return (isProject(a) && isProject(b) && a.start && b.start) ? new Date(b.start).getTime() - new Date(a.start).getTime() : 0;
+    },
+    post: (a: Content, b: Content) => {
+        return (isPost(a) && isPost(b) && a.date && b.date) ? new Date(b.date).getTime() - new Date(a.date).getTime() : 0;
+    }
+};

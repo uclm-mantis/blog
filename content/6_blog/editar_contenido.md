@@ -58,7 +58,11 @@ Todo lo que está en `/public` está automáticamente disponible en el sitio fin
 
 ## Editar contenido en Markdown
 
-Antes de nada, un poco de teoría.  Un archivo Markdown tiene dos partes, una cabecera
+Antes de nada, un poco de teoría.  Un archivo Markdown tiene dos partes, una cabecera y un cuerpo. Veamos un ejemplo:
+
+```
+
+```
 
 Este es un ejemplo de matemáticas en línea: $E = mc^2$.
 

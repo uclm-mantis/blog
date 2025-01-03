@@ -144,6 +144,7 @@ async function renderContent(contents: Content[]): Promise<Content[]> {
   );
 }
 
+import { contentCompare } from '@/config';
 
 export async function getAll(
   section?: string,
@@ -153,7 +154,7 @@ export async function getAll(
 
   // Obtener metadatos de todos los archivos
   const allMetadata = filePaths
-    .filter((filePath) => (filePath.endsWith('.md') || filePath.endsWith('.mdx')))
+    .filter((filePath) => filePath.endsWith('.md') || filePath.endsWith('.mdx'))
     .map((filePath) => {
       const slug = path
         .relative(contentDirectory, filePath)
@@ -170,9 +171,26 @@ export async function getAll(
       (type ? item.type === type : true)
   );
 
-  // Renderizar solo los contenidos filtrados
-  return renderContent(filteredMetadata);
+  // Ordenar los contenidos
+  const sortedMetadata = filteredMetadata.sort((a, b) => {
+    // Prioridad de orden inverso por `order`
+    if (a.order !== undefined && b.order !== undefined) {
+      return b.order - a.order;
+    }
+
+    // Usar comparadores específicos según `type` en `contentCompare`
+    if (contentCompare[a.type as keyof typeof contentCompare]) {
+      const comparator = contentCompare[a.type as keyof typeof contentCompare];
+      return comparator(a, b);
+    }
+
+    return 0; // Sin cambios si no hay criterios de comparación aplicables
+  });
+
+  // Renderizar solo los contenidos filtrados y ordenados
+  return renderContent(sortedMetadata);
 }
+
 
 export async function getBySlug(slug: string): Promise<Content> {
   const md = path.join(contentDirectory, slug) + '.md';
