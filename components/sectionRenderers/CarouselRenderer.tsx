@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Content } from '@/config';
 import ContentRenderer from '../ContentRenderer';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { featured } from '../../config';
 
 interface CarouselRendererProps {
@@ -21,20 +21,23 @@ export default function CarouselRenderer({
     return items.filter((item) => slugs.includes(item.slug));
   }, [items, currentSection]);
 
-  const nextItem = () =>
+  const nextItem = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % items.length);
+  }, [items.length]);
 
-  const prevItem = () =>
+  const prevItem = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+  }, [items.length]);
 
   // Configurar el cambio automático cada 5 segundos
   useEffect(() => {
     const interval = setInterval(nextItem, 5000);
     return () => clearInterval(interval); // Limpiar el intervalo al desmontar
-  }, [items]);
+  }, [nextItem]);
 
   return (
     <div className="mx-auto p-6 relative no-underline">
+      <div className='prose lg:prose-xl mb-4'><h1>{currentSection}</h1></div>
       <div className="carousel flex items-center justify-center overflow-hidden relative h-64">
         {/* Botón de navegación izquierdo */}
         <button
@@ -86,7 +89,9 @@ export default function CarouselRenderer({
       {/* Sección Featured */}
       {featuredItems.length > 0 && (
         <section className="mt-8">
-          <div className='prose lg:prose-xl'><h2>Featured</h2></div>
+          <div className="prose lg:prose-xl">
+            <h2>Featured</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {featuredItems.map((item) => (
               <ContentRenderer

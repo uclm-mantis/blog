@@ -38,14 +38,14 @@ Ya está, eso es todo. Ya tienes una web editable directamente desde GitHub.  Al
 
 Los aspectos interesantes de la estructura se muestran a continuación.
 
-<div className="flex justify-center">
+<div className="flex w-3/4 mx-auto border p-2 rounded-lg shadow">
   <FileTreeViewer fileTree={[
-    { name: '/', children: [
-      { name: 'components/' },
-      { name: 'pages/' },
-      { name: 'content/' },
-      { name: 'public/' },
-      { name: 'config.ts', type: 'file' },
+    { name: '/', type: 'directory', children: [
+      { name: 'components/', type: 'directory', },
+      { name: 'pages/',      type: 'directory', },
+      { name: 'content/',    type: 'directory', description: 'Contenido editable del sitio' },
+      { name: 'public/',     type: 'directory', description: 'Archivos gráficos y descargables' },
+      { name: 'config.ts',   type: 'file',      description: 'Archivo de configuración de MBlog' },
     ]}
   ]} />
 </div>

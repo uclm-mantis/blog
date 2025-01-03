@@ -57,6 +57,7 @@ export interface FileNode {
   name: string;
   type: 'file' | 'directory';
   slug?: string;
+  description?: string;
   children?: FileNode[];
 }
 
