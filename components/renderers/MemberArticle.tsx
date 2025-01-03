@@ -3,6 +3,7 @@ import { TeamMember } from "@/config";
 import { FaGithub, FaOrcid, FaEnvelope, FaPhone } from "react-icons/fa";
 import { MDXRemote } from "next-mdx-remote";
 import FileTreeViewer from "../FileTreeViewer";
+import Image from "next/image";
 
 interface MemberArticleProps {
   member: TeamMember;
@@ -23,9 +24,9 @@ export default function MemberArticle({ member }: MemberArticleProps) {
     <article className="prose lg:prose-xl mx-auto flex flex-wrap">
       {member.image && (
         <div className="w-full lg:w-1/4 lg:pr-4">
-          <img
+          <Image
             src={member.image}
-            alt={member.givenName}
+            alt={member.title}
             className="rounded-lg shadow-md w-full mb-4"
           />
         </div>

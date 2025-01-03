@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { TeamMember } from "@/config";
 import { FaGithub, FaOrcid, FaUserCircle } from "react-icons/fa";
+import Image from 'next/image';
 
 interface MemberSummaryProps {
   member: TeamMember;
@@ -14,7 +15,7 @@ export default function MemberSummary({ member }: MemberSummaryProps) {
       {/* Imagen o icono por defecto */}
       <div className="flex-shrink-0">
         {member.image ? (
-          <img
+          <Image
             src={member.image}
             alt={`${member.title}'s profile`}
             className="w-16 h-16 rounded-full object-cover"

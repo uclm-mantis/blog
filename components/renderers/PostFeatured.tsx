@@ -2,12 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { Post } from "@/config";
 
+const basePath = process.env.BASE_PATH;
+
 interface PostFeaturedProps {
   post: Post;
 }
 
 export default function PostFeatured({ post }: PostFeaturedProps) {
-  const defaultImage = "/img/default-bg-post.png"; // Ruta al patrón estándar
+  const defaultImage = `${basePath}/img/default-bg-post.png`; // Ruta al patrón estándar
 
   return (
     <Link href={`/content/${post.slug}`} className="block">
