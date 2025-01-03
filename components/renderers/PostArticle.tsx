@@ -3,6 +3,9 @@ import React from "react";
 import { Post } from "@/config";
 import { MDXRemote } from "next-mdx-remote";
 import FileTreeViewer from "../FileTreeViewer";
+import config from '@/next.config';
+
+const basePath = config.basePath;
 
 interface PostArticleProps {
   post: Post;
@@ -13,7 +16,7 @@ export default function PostArticle({ post }: PostArticleProps) {
     <article className="prose lg:prose-xl mx-auto">
       <div className="relative w-full">
         <img 
-          src={post.image? post.image : "/img/default-bg-post.png"} 
+          src={post.image? post.image : `${basePath}/img/default-bg-post.png`} 
           alt={`Image for ${post.title}`} 
           className="w-full h-auto object-cover" 
         />

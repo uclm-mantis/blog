@@ -6,7 +6,7 @@ email: "francisco.moya@uclm.es"
 id: "5022422-A"
 github: FranciscoMoya
 orcid: 0000-0002-6842-4999
-image: /team/paco.jpg
+image: "{{basePath}}/team/paco.jpg"
 phone: "+34 926295483"
 position: Associate Professor
 section: Team

@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import config from '../next.config';
 
-const basePath = config.basePath || '';
+const basePath = config.basePath;
 
 export default function Document() {
   return (
