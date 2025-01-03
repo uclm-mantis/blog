@@ -57,6 +57,7 @@ export interface Post extends ContentBase {
     date?: string;
     author?: string;
     image?: string;
+    description?: string;
 }
 
 export interface Block extends ContentBase {

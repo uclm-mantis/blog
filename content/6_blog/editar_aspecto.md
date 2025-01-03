@@ -5,6 +5,8 @@ author: Francisco Moya
 section: Blog
 type: post
 order: 1
+description:
+    Para editar el aspecto debes tener alguna familiaridad con NextJS. Se trata de un framework web construido sobre React. En MBlog usamos también módulos para facilitar la creación de gráficos (Mermaid), gráficos estadísticos (Recharts) y textos científicos (KaTeX).
 ---
 
 Para editar el aspecto debes tener alguna familiaridad con [NextJS](https://nextjs.org/). Se trata de un framework web construido sobre [React](https://es.react.dev/). En **MBlog** usamos también módulos para facilitar la creación de gráficos ([Mermaid](https://mermaid.js.org/)), gráficos estadísticos ([Recharts](https://recharts.org/)) y textos científicos ([KaTeX](https://katex.org/)).

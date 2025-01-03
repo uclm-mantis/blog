@@ -18,20 +18,21 @@ export default function ListRenderer({ items, currentSection }: ListRendererProp
 
   return (
     <div className="mx-auto p-6">
-        <div className='prose lg:prose-xl mb-4'><h1>{currentSection}</h1></div>
-        {/* Sección Featured */}
-        {featuredItems.length > 0 && (
-            <section className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {featuredItems.map((item) => (
-                <PostFeatured key={`ppost-${item.slug}`} post={item as Post} />
-                ))}
-            </div>
-            </section>
-        )}
-      <ul className="divide-y divide-gray-300">
+      <div className='prose lg:prose-xl mb-4'><h1>{currentSection}</h1></div>
+      {/* Sección Featured */}
+      {featuredItems.length > 0 && (
+          <section className="mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {featuredItems.map((item) => (
+              <PostFeatured key={`ppost-${item.slug}`} post={item as Post} />
+              ))}
+          </div>
+          </section>
+      )}
+      <div className='prose lg:prose-xl mb-1'><h2>Latest posts</h2></div>
+      <ul>
         {items.map((content) => (
-          <li key={`li-${content.slug}`} className="p-4">
+          <li key={`li-${content.slug}`} className="px-0 py-2">
             <ContentRenderer content={content} variant="summary" />
           </li>
         ))}

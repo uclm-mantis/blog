@@ -20,7 +20,6 @@ import {
 
 const mdxComponents = {
   Table, ChartComponent, FileTreeViewer, Mermaid,
-  // recharts
   Surface, Layer, Legend, DefaultLegendContent, Tooltip, DefaultTooltipContent, ResponsiveContainer,
   Cell, Text, Label, LabelList, Customized, Sector, Curve, Rectangle, Polygon, Dot, Cross, Symbols, PolarGrid,
   PolarRadiusAxis, PolarAngleAxis, Pie, Radar, RadialBar, Brush, ReferenceLine, ReferenceDot, ReferenceArea,

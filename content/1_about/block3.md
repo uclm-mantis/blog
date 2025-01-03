@@ -6,7 +6,7 @@ style: bg-gray-800 text-black p-5
 ---
 
 
-<div className="flex">
+<div className="flex flex-wrap">
   <div className="w-1/2 p-4 text-gray-200">
 ## <span className="text-white">Manage your data</span>
 
