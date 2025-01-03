@@ -31,7 +31,7 @@ export default function CarouselRenderer({
   useEffect(() => {
     const interval = setInterval(nextItem, 5000);
     return () => clearInterval(interval); // Limpiar el intervalo al desmontar
-  }, [items, nextItem]);
+  }, [items]);
 
   return (
     <div className="mx-auto p-6 relative no-underline">
