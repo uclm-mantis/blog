@@ -28,6 +28,7 @@ export default function MemberArticle({ member }: MemberArticleProps) {
             src={member.image}
             alt={member.title}
             className="rounded-lg shadow-md w-full mb-4"
+            width={180} height={180} layout="responsive"
           />
         </div>
       )}

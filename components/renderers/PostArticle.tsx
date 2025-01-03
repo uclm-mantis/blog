@@ -19,6 +19,7 @@ export default function PostArticle({ post }: PostArticleProps) {
           src={post.image? post.image : `${basePath}/img/default-bg-post.png`} 
           alt={`Image for ${post.title}`} 
           className="w-full h-auto object-cover" 
+          width={750} height={230} layout="responsive"
         />
       </div>
       <h1 className="mb-1 lg:mb-1">{post.title}</h1>

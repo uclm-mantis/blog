@@ -10,30 +10,34 @@ interface MemberSummaryProps {
 
 export default function MemberSummary({ member }: MemberSummaryProps) {
   return (
-    <Link href={`/content/${member.slug}`}>
     <div className="border p-4 rounded-md shadow-md flex items-start space-x-4">
       {/* Imagen o icono por defecto */}
-      <div className="flex-shrink-0">
-        {member.image ? (
-          <Image
-            src={member.image}
-            alt={`${member.title}'s profile`}
-            className="w-16 h-16 rounded-full object-cover"
-          />
-        ) : (
-          <FaUserCircle size={64} className="text-gray-400" />
-        )}
-      </div>
+      <Link href={`/content/${member.slug}`}>
+        <div className="flex-shrink-0">
+          {member.image ? (
+            <Image
+              src={member.image}
+              alt={`${member.title}'s profile`}
+              className="w-16 h-16 rounded-full object-cover"
+              width={64} height={64} layout="responsive"
+              />
+          ) : (
+            <FaUserCircle size={64} className="text-gray-400" />
+          )}
+        </div>
+      </Link>
 
       {/* Información del perfil */}
       <div>
         {/* Título obligatorio */}
-        <h2 className="text-lg font-bold mb-1">
-          {member.title}
-        </h2>
+        <Link href={`/content/${member.slug}`}>
+          <h2 className="text-lg font-bold mb-1">
+            {member.title}
+          </h2>
 
-        {/* Posición */}
-        {member.position && <p className="text-sm text-gray-600">{member.position}</p>}
+          {/* Posición */}
+          {member.position && <p className="text-sm text-gray-600">{member.position}</p>}
+        </Link>
 
         {/* Email */}
         {member.email && (
@@ -71,6 +75,5 @@ export default function MemberSummary({ member }: MemberSummaryProps) {
         </div>
       </div>
     </div>
-    </Link>
   );
 }
