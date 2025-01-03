@@ -66,6 +66,7 @@ $$
 
 Y ahora un gráfico Mermaid
 
+<div className="flex justify-center">
 ```mermaid
 graph TD;
   A[Inicio] --> B{¿Condición?};
@@ -73,8 +74,9 @@ graph TD;
   B -->|No| D[Terminar];
   C --> D;
 ```
- Y ahora alguna gráfica más
+</div>
 
+Y ahora alguna gráfica más
 
 <ResponsiveContainer width={700} height="80%">
  <ChartComponent

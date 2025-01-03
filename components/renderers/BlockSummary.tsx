@@ -1,7 +1,7 @@
 // components/renderers/MemberSummary.tsx
 import React from "react";
 import Link from 'next/link';
-import { Block } from "@/lib/content";
+import { Block } from "@/config";
 
 interface BlockSummaryProps {
     block: Block;

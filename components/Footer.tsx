@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import React from "react";
-import { SITE_NAME } from "../config";
+import { SITE_NAME } from "@/config";
 
 export default function Footer() {
   return (

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Content } from '@/lib/content';
+import { Content } from '@/config';
 import ContentRenderer from '../ContentRenderer';
 import { useState, useMemo, useEffect } from 'react';
 import { featured } from '../../config';
@@ -31,7 +31,7 @@ export default function CarouselRenderer({
   useEffect(() => {
     const interval = setInterval(nextItem, 5000);
     return () => clearInterval(interval); // Limpiar el intervalo al desmontar
-  }, [items]);
+  }, [items, nextItem]);
 
   return (
     <div className="mx-auto p-6 relative no-underline">

@@ -1,7 +1,7 @@
 // components/renderers/PostSummary.tsx
 import React from "react";
 import Link from 'next/link';
-import { Post } from "@/lib/content";
+import { Post } from "@/config";
 
 interface PostSummaryProps {
     post: Post;

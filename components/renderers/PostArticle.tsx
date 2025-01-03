@@ -1,6 +1,6 @@
 // components/renderers/PostArticle.tsx
 import React from "react";
-import { Post } from "@/lib/content";
+import { Post } from "@/config";
 import { MDXRemote } from "next-mdx-remote";
 import FileTreeViewer from "../FileTreeViewer";
 

@@ -1,8 +1,7 @@
 // components/sectionRenderers/ListRenderer.tsx
-import { Content, Post } from '@/config';
+import { Content, Post, featured } from '@/config';
 import ContentRenderer from '../ContentRenderer';
 import PostFeatured from '../renderers/PostFeatured';
-import { featured } from '../../config';
 import { useMemo } from 'react';
 
 interface ListRendererProps {
@@ -25,7 +24,7 @@ export default function ListRenderer({ items, currentSection }: ListRendererProp
             <section className="mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {featuredItems.map((item) => (
-                <PostFeatured post={item as Post} />
+                <PostFeatured key={`ppost-${item.slug}`} post={item as Post} />
                 ))}
             </div>
             </section>

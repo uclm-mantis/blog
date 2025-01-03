@@ -1,6 +1,6 @@
 // components/ContentRenderer.tsx
 import React from "react";
-import { Content } from "../lib/content";
+import { Content } from "@/config";
 import { renderers } from "./renderers";
 
 type ContentType = keyof typeof renderers;

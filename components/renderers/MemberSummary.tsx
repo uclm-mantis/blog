@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { TeamMember } from "@/lib/content";
+import { TeamMember } from "@/config";
 import { FaGithub, FaOrcid, FaUserCircle } from "react-icons/fa";
 
 interface MemberSummaryProps {

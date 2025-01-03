@@ -12,7 +12,7 @@ import rehypeMermaid from 'rehype-mermaid';
 import rehypePrism from 'rehype-prism';
 import { Content } from '@/config';
 
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function replaceBasePath(value: any): any {
   if (typeof value === 'string') {
     return value.replace(/{{basePath}}/g, process.env.BASE_PATH || '');
@@ -28,6 +28,7 @@ function replaceBasePath(value: any): any {
   return value;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function preprocessMarkdown(content: string): { content: string; data: any } {
   const { data, content: rawContent } = matter(content);
 

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import React from "react";
 import Link from "next/link";
-import { SITE_NAME } from "../config";
+import { SITE_NAME } from "@/config";
 
 interface HeaderProps {
   sections: { name: string; slug: string }[];

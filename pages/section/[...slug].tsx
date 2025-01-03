@@ -1,8 +1,7 @@
 // pages/section/[...slug].tsx
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAll, getSections, Section } from '@/lib/markdown';
-import { Content } from '@/lib/content';
-import { sectionRenderers, SectionRenderers } from '@/config';
+import { Content, sectionRenderers, SectionRenderers } from '@/config';
 
 interface SectionProps {
   items: Content[];

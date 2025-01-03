@@ -1,7 +1,7 @@
 // components/renderers/ProjectSummary.tsx
 import React from "react";
 import Link from 'next/link';
-import { Project } from "@/lib/content";
+import { Project } from "@/config";
 
 interface ProjectSummaryProps {
     project: Project;

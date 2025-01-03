@@ -6,6 +6,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { Table } from '@/components/Table';
 import ChartComponent from '@/components/ChartComponent';
 import FileTreeViewer from '@/components/FileTreeViewer';
+import Mermaid from '@/components/Mermaid';
 import {
     Surface, Layer, Legend, DefaultLegendContent, Tooltip, DefaultTooltipContent, ResponsiveContainer,
     Cell, Text, Label, LabelList, Customized, Sector, Curve, Rectangle, Polygon, Dot, Cross, Symbols, PolarGrid,
@@ -18,7 +19,7 @@ import {
 // for static mdx rendering we need to pass all of the components explicitly since import is not available in MDX
 
 const mdxComponents = {
-  Table, ChartComponent, FileTreeViewer,
+  Table, ChartComponent, FileTreeViewer, Mermaid,
   // recharts
   Surface, Layer, Legend, DefaultLegendContent, Tooltip, DefaultTooltipContent, ResponsiveContainer,
   Cell, Text, Label, LabelList, Customized, Sector, Curve, Rectangle, Polygon, Dot, Cross, Symbols, PolarGrid,

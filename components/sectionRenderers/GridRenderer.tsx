@@ -1,5 +1,5 @@
 // components/sectionRenderers/GridRenderer.tsx
-import { Content } from '@/lib/content';
+import { Content } from '@/config';
 import ContentRenderer from '../ContentRenderer';
 
 interface GridRendererProps {
