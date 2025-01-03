@@ -9,11 +9,6 @@ interface MemberArticleProps {
 }
 
 export default function MemberArticle({ member }: MemberArticleProps) {
-  const obfuscatePhone = (phone?: string) => {
-    if (!phone) return "";
-    return phone.replace(/.(?=.{4})/g, "*");
-  };
-
   const renderPhone = (phone?: string) => {
     if (!phone) return null;
     const parts = phone.split("").map((char, index) => (
