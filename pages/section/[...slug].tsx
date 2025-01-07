@@ -2,6 +2,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getAll, getSections, Section } from '@/lib/markdown';
 import { Content, sectionRenderers, SectionRenderers } from '@/config';
+import ListRenderer from '@/components/sectionRenderers/ListRenderer';
 
 interface SectionProps {
   items: Content[];
@@ -31,6 +32,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export default function SectionPage({ items, currentSection }: SectionProps) {
-  const Renderer = sectionRenderers[currentSection as keyof SectionRenderers]?.renderer || (() => <p>Renderer for {currentSection} not found</p>);
+  const Renderer = sectionRenderers[currentSection as keyof SectionRenderers]?.renderer || ListRenderer;
   return (<Renderer items={items} currentSection={currentSection} />);
 }

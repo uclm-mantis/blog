@@ -3,13 +3,13 @@ import path from 'path';
 import matter from 'gray-matter';
 import math from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
 import remarkGfm from 'remark-gfm';
-import rehypeStringify from 'rehype-stringify';
+import remarkDirective from 'remark-directive'
 import rehypeMermaid from 'rehype-mermaid';
 import rehypePrism from 'rehype-prism';
+import { Root } from 'mdast';
+import { visit } from 'unist-util-visit';
+import { h } from 'hastscript';
 import { Content } from '@/config';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -105,40 +105,42 @@ function getMetadata(slug: string, filepath: string): Omit<Content, 'contentHtml
   } as Content;
 }
 
+function myRemarkPlugin() {
+  return function (tree: Root): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    visit(tree, (node: any) => {
+      if (
+        node.type === 'containerDirective' ||
+        node.type === 'leafDirective' ||
+        node.type === 'textDirective'
+      ) {
+        if (node.name !== 'note') return
+
+        const data = node.data || (node.data = {})
+        const tagName = node.type === 'textDirective' ? 'span' : 'div'
+
+        data.hName = tagName
+        data.hProperties = h(tagName, node.attributes || {}).properties
+      }
+    });
+  };
+}
+
 import { serialize } from "next-mdx-remote/serialize";
 
 async function renderContent(contents: Content[]): Promise<Content[]> {
   return Promise.all(
     contents.map(async (content) => {
-      if (content.type === "post" || content.type === "block" || content.type === "member") {
-        // Procesa contenido como MDX
-        const mdxSource = await serialize(content.content || '', {
-          mdxOptions: {
-            remarkPlugins: [math, remarkGfm],
-            rehypePlugins: [rehypeKatex, rehypeMermaid, rehypePrism],
-          },
-        });
-        return {
-          ...content,
-          contentHtml: mdxSource, // Devuelve la fuente MDX
-        };
-      }
-
-      // Para otros tipos, usa el pipeline existente
-      const processor = unified()
-        .use(remarkParse)
-        .use(math)
-        .use(remarkGfm)
-        .use(remarkRehype, { allowDangerousHtml: true })
-        .use(rehypeKatex)
-        .use(rehypeMermaid)
-        .use(rehypePrism)
-        .use(rehypeStringify, { allowDangerousHtml: true });
-
-      const processedContent = await processor.process(content.content);
+      // Procesa contenido como MDX
+      const mdxSource = await serialize(content.content || '', {
+        mdxOptions: {
+          remarkPlugins: [remarkDirective, myRemarkPlugin, math, remarkGfm],
+          rehypePlugins: [rehypeKatex, rehypeMermaid, rehypePrism],
+        },
+      });
       return {
         ...content,
-        contentHtml: processedContent.toString(),
+        contentHtml: mdxSource, // Devuelve la fuente MDX
       };
     })
   );

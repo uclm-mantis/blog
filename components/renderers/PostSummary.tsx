@@ -10,7 +10,7 @@ export default function PostSummary({ post }: PostSummaryProps) {
   return (
     <div className="border rounded-lg shadow-lg bg-gray-50 hover:bg-gray-100">
       {/* Título del post con banda de color */}
-      <h2 className="bg-blue-900 rounded-t-lg text-blue-100 font-bold text-lg py-2 px-4">
+      <h2 className="bg-gray-800 rounded-t-lg text-blue-100 font-bold text-lg py-2 px-4">
         <Link href={`/content/${post.slug}`} className="hover:underline">
           {post.title}
         </Link>
