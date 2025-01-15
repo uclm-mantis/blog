@@ -3,10 +3,10 @@ title: "Linus Torvalds"
 givenName: Linus
 sn: Torvalds
 email: "linus.torvalds@hut.fi"
-id: "X-1234567"
+id: "X-12345678"
 github: Torvalds
 orcid: 0000-0000-0000-0000
-position: Hacker
+position: Kernel Hacker
 section: Team
 type: member
 ---
